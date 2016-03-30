@@ -66,3 +66,20 @@ ADD ./supervisord.conf /etc/supervisord.conf
 # Start Supervisord
 ADD ./start.sh /start.sh
 RUN chmod 755 /start.sh
+
+# Setup Volume
+VOLUME ["/app"]
+
+# chmod /app
+RUN chown -Rf www-data.www-data /app/
+
+# add composer
+RUN curl -sS https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/local/bin/composer
+RUN composer global require "fxp/composer-asset-plugin:~1.1.1" --prefer-source --no-interaction
+
+# Expose Ports
+EXPOSE 443
+EXPOSE 80
+
+CMD ["/bin/bash", "/start.sh"]
