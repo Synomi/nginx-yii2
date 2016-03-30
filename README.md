@@ -7,6 +7,7 @@ Container uses /app as volume, you could link volume to that folder to have file
 Run command example:
 docker run -p 80:80 --name yii2app -v "$(pwd)":"/app" -d synomi/nginx-yii2
 
+(Warning: above run command will link(volume) your current directory to the container, potentially messing with directory's files)
 
 ## Example of creating yii2 basic app
 Nginx default web dir is /app/web, which will not exist when container is first started. You need to create yii2 application to /app, which will create /app/web dir along with other yii2 application files.
